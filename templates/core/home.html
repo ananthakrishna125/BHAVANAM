@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero py-5 bg-light">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h1 class="display-4 fw-bold">
+                    Find Your Perfect Home in Kerala
+                </h1>
+
+                <p class="lead mb-4">
+                    Buy Houses • Rent Houses • Hostels • Rental Rooms
+                </p>
+
+                <div class="card shadow border-0">
+
+                    <div class="card-body">
+
+                        <form action="{% url 'search_properties' %}" method="GET">
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+
+                                    <select id="district"
+                                            class="form-select"
+                                            name="district">
+
+                                        <option value="">
+                                            Select District
+                                        </option>
+
+                                        {% for district in districts %}
+
+                                        <option value="{{ district.id }}">
+                                            {{ district.name }}
+                                        </option>
+
+                                        {% endfor %}
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <select id="location"
+                                            class="form-select"
+                                            name="location">
+
+                                        <option value="">
+                                            Select Location
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <select class="form-select"
+                                            name="purpose">
+
+                                        <option value="">
+                                            Purpose
+                                        </option>
+
+                                        <option value="BUY">
+                                            Buy
+                                        </option>
+
+                                        <option value="RENT">
+                                            Rent
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <select class="form-select"
+                                            name="property_type">
+
+                                        <option value="">
+                                            Property Type
+                                        </option>
+
+                                        <option value="HOUSE">
+                                            House
+                                        </option>
+
+                                        <option value="APARTMENT">
+                                            Apartment
+                                        </option>
+
+                                        <option value="HOSTEL">
+                                            Hostel
+                                        </option>
+
+                                        <option value="ROOM">
+                                            Rental Room
+                                        </option>
+
+                                        <option value="COMMERCIAL">
+                                            Commercial
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-12">
+
+                                    <button class="btn btn-success w-100">
+
+                                        <i class="bi bi-search"></i>
+
+                                        Search Properties
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 text-center">
+
+                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900"
+                     class="img-fluid rounded shadow"
+                     alt="House">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- POPULAR DISTRICTS -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <h2 class="text-center fw-bold mb-5">
+
+            Popular Districts
+
+        </h2>
+
+        <div class="row g-4">
+
+            {% for district in districts %}
+
+            <div class="col-lg-2 col-md-3 col-6">
+
+                <div class="card shadow-sm border-0 h-100">
+
+                    <div class="card-body text-center">
+
+                        <i class="bi bi-geo-alt-fill text-success fs-2"></i>
+
+                        <h6 class="mt-3">
+
+                            {{ district.name }}
+
+                        </h6>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-6">
+
+                <h2 class="fw-bold mb-4">
+
+                    Contact Us
+
+                </h2>
+
+                <p>
+
+                    BHAVANAM is Kerala's property platform for buying,
+                    selling and renting houses, hostels and rental rooms.
+
+                </p>
+
+                <hr>
+
+                <p>
+
+                    <i class="bi bi-envelope-fill text-success"></i>
+
+                    bhavanamforyou@gmail.com
+
+                </p>
+
+                <p>
+
+                    <i class="bi bi-geo-alt-fill text-success"></i>
+
+                    Idukki, Kerala, India
+
+                </p>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="card shadow border-0">
+
+                    <div class="card-body">
+
+                        <form action="{% url 'contact' %}" method="POST">
+
+                            {% csrf_token %}
+
+                            <div class="mb-3">
+
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="form-control"
+                                    placeholder="Your Name"
+                                    required>
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <input
+                                    type="email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="Your Email"
+                                    required>
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <input
+                                    type="text"
+                                    name="phone"
+                                    class="form-control"
+                                    placeholder="Phone Number"
+                                    required>
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <textarea
+                                    name="message"
+                                    rows="5"
+                                    class="form-control"
+                                    placeholder="Your Message"
+                                    required></textarea>
+
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="btn btn-success w-100">
+
+                                <i class="bi bi-send-fill"></i>
+
+                                Send Message
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

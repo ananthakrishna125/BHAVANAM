@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="dashboard">
+
+    <div class="sidebar">
+
+        <h3>🏠 BHAVANAM</h3>
+
+        <hr>
+
+        <a href="#">📊 Dashboard</a>
+
+        <a href="/admin/properties/property/">🏠 Properties</a>
+
+        <a href="/admin/districts/district/">📍 Districts</a>
+
+        <a href="/admin/locations/location/">📌 Locations</a>
+
+        <a href="/admin/">⚙ Django Admin</a>
+
+    </div>
+
+    <div class="content">
+
+        <h2>Dashboard</h2>
+
+        <div class="cards">
+
+            <div class="card-box">
+
+                <h1>{{ total_properties }}</h1>
+
+                <p>Total Properties</p>
+
+            </div>
+
+            <div class="card-box">
+
+                <h1>{{ available_properties }}</h1>
+
+                <p>Available</p>
+
+            </div>
+
+            <div class="card-box">
+
+                <h1>{{ districts }}</h1>
+
+                <p>Districts</p>
+
+            </div>
+
+            <div class="card-box">
+
+                <h1>{{ locations }}</h1>
+
+                <p>Locations</p>
+
+            </div>
+
+        </div>
+
+        <div class="table-box">
+
+            <h4>Latest Properties</h4>
+
+            <table>
+
+                <tr>
+
+                    <th>Title</th>
+
+                    <th>District</th>
+
+                    <th>Price</th>
+
+                </tr>
+
+                {% for property in latest_properties %}
+
+                <tr>
+
+                    <td>{{ property.title }}</td>
+
+                    <td>{{ property.district }}</td>
+
+                    <td>₹ {{ property.price }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
