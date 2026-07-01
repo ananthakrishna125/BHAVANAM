@@ -19,13 +19,13 @@ def home(request):
 
 
 
+
 def contact(request):
     if request.method == "POST":
-
-        name = request.POST["name"]
-        email = request.POST["email"]
-        phone = request.POST["phone"]
-        message = request.POST["message"]
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        message = request.POST.get("message")
 
         # Save enquiry
         Enquiry.objects.create(
@@ -35,24 +35,23 @@ def contact(request):
             message=message,
         )
 
-        # Send email to BHAVANAM
-        send_mail(
-            subject=f"New Enquiry from {name}",
-            message=f"""
+        # Try to send email
+        try:
+            send_mail(
+                subject=f"New Enquiry from {name}",
+                message=f"""
 Name: {name}
-
 Email: {email}
-
 Phone: {phone}
 
 Message:
 {message}
 """,
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=["bhavanamforyou@gmail.com"],
-            fail_silently=False,
-        )
-
-        return redirect("home")
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=["bhavanamforyou@gmail.com"],
+                fail_silently=True,
+            )
+        except Exception:
+            pass
 
     return redirect("home")
