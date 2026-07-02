@@ -60,9 +60,9 @@ Message:
 
 
 def create_admin(request):
-    username = "admin"
-    password = "YourNewPassword123"  # Change this
-    email = "your@email.com"         # Change this
+    username = "BHAVANAM"
+    password = "ananthan2005KS"  # Change this
+    email = "bhavanamforyou@gmail.com"         # Change this
 
     user, created = User.objects.get_or_create(
         username=username,
