@@ -4,7 +4,8 @@ from django.conf import settings
 from districts.models import District
 from django.shortcuts import redirect
 from enquiries.models import Enquiry
-
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 
 def home(request):
 
@@ -55,3 +56,25 @@ Message:
             pass
 
     return redirect("home")
+
+
+
+def create_admin(request):
+    username = "admin"
+    password = "YourNewPassword123"  # Change this
+    email = "your@email.com"         # Change this
+
+    user, created = User.objects.get_or_create(
+        username=username,
+        defaults={"email": email}
+    )
+
+    user.email = email
+    user.is_staff = True
+    user.is_superuser = True
+    user.set_password(password)
+    user.save()
+
+    if created:
+        return HttpResponse("Admin user created successfully.")
+    return HttpResponse("Admin password updated successfully.")
