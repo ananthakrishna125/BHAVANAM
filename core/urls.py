@@ -9,4 +9,3 @@ urlpatterns = [
     # Temporary - remove after use
     path("create-admin/", views.create_admin, name="create_admin"),
 ]
-]
